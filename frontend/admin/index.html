@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="dark">
+    <title>Painel administrativo | ZEUS</title>
+    <link rel="stylesheet" href="/static/admin/admin.css">
+</head>
+<body>
+    <div class="admin-shell">
+        <aside id="sidebar" class="sidebar">
+            <a class="brand" href="/admin" aria-label="ZEUS, início do painel">
+                <span class="brand-mark" aria-hidden="true">Z</span>
+                <span><strong>ZEUS</strong><small>ADMINISTRAÇÃO</small></span>
+            </a>
+
+            <nav class="navigation" aria-label="Navegação administrativa">
+                <button class="nav-item is-active" data-view="dashboard" type="button">
+                    <span class="nav-symbol" aria-hidden="true">⌂</span> Visão geral
+                </button>
+                <button class="nav-item" data-view="units" type="button">
+                    <span class="nav-symbol" aria-hidden="true">▤</span> Unidades
+                </button>
+                <button class="nav-item admin-only" data-view="users" type="button" hidden>
+                    <span class="nav-symbol" aria-hidden="true">♙</span> Usuários
+                </button>
+                <button class="nav-item admin-only" data-view="audit" type="button" hidden>
+                    <span class="nav-symbol" aria-hidden="true">◷</span> Auditoria
+                </button>
+            </nav>
+
+            <div class="sidebar-bottom">
+                <p class="institution">Tribunal de Justiça<br>do Maranhão</p>
+                <button id="about-button" class="about-button" type="button">Sobre o sistema</button>
+                <button id="logout-button" class="logout-button" type="button">
+                    <span aria-hidden="true">↪</span> Encerrar sessão
+                </button>
+            </div>
+        </aside>
+
+        <main class="main-area">
+            <header class="topbar">
+                <button id="menu-button" class="icon-button menu-button" type="button" aria-label="Abrir menu" aria-expanded="false">☰</button>
+                <div>
+                    <p class="topbar-eyebrow">ÁREA ADMINISTRATIVA</p>
+                    <h1 id="page-title">Visão geral</h1>
+                </div>
+                <div class="user-indicator">
+                    <span class="online-dot" aria-hidden="true"></span>
+                    <span id="current-user">Carregando sessão</span>
+                    <span id="current-role" class="role-label"></span>
+                </div>
+            </header>
+
+            <div id="global-message" class="global-message" role="status" aria-live="polite"></div>
+
+            <section id="dashboard-view" class="page-view">
+                <div class="section-heading">
+                    <div>
+                        <h2>Resumo do cadastro</h2>
+                        <p>Estado atual das unidades e contatos institucionais.</p>
+                    </div>
+                    <button class="primary-button" data-open-unit type="button">＋ Nova unidade</button>
+                </div>
+                <div class="metric-grid">
+                    <article class="metric"><span>Unidades</span><strong id="metric-units">—</strong><small id="metric-unit-status"></small></article>
+                    <article class="metric metric-blue"><span>Contatos</span><strong id="metric-contacts">—</strong><small id="metric-active-contacts"></small></article>
+                    <article class="metric metric-green"><span>Categorias</span><strong id="metric-categories">—</strong><small>cadastradas</small></article>
+                    <article class="metric metric-amber"><span>Comarcas</span><strong id="metric-comarcas">—</strong><small>com registros</small></article>
+                    <article class="metric metric-muted"><span>Consultas</span><strong id="metric-queries">—</strong><small>Não contabilizadas</small></article>
+                </div>
+                <section class="distribution-grid" aria-label="Distribuição do cadastro">
+                    <article class="distribution-panel">
+                        <div class="panel-heading"><div><h2>Unidades por categoria</h2><p>Distribuição do cadastro atual.</p></div></div>
+                        <div id="category-distribution" class="distribution-list"></div>
+                    </article>
+                    <article class="distribution-panel">
+                        <div class="panel-heading"><div><h2>Unidades por comarca</h2><p>Comarca informada no cadastro.</p></div></div>
+                        <div id="comarca-distribution" class="distribution-list"></div>
+                    </article>
+                </section>
+                <section class="content-section admin-only">
+                    <div class="section-heading compact-heading">
+                        <div><h2>Alterações recentes</h2><p>Últimos registros de auditoria.</p></div>
+                        <button class="text-button admin-only" data-view="audit" type="button" hidden>Ver histórico</button>
+                    </div>
+                    <div class="table-wrap">
+                        <table>
+                            <thead><tr><th>Data</th><th>Responsável</th><th>Ação</th><th>Registro</th></tr></thead>
+                            <tbody id="recent-audit-body"><tr><td colspan="4" class="empty-state">Carregando…</td></tr></tbody>
+                        </table>
+                    </div>
+                </section>
+            </section>
+
+            <section id="units-view" class="page-view" hidden>
+                <div class="section-heading">
+                    <div><h2>Unidades</h2><p>Pesquise, filtre e mantenha os contatos institucionais.</p></div>
+                    <button class="primary-button" data-open-unit type="button">＋ Nova unidade</button>
+                </div>
+                <form id="unit-filters" class="filter-bar">
+                    <label class="search-field"><span>Pesquisar</span><input id="filter-search" type="search" maxlength="100" placeholder="Nome da unidade"></label>
+                    <label><span>Categoria</span><select id="filter-category"><option value="">Todas</option></select></label>
+                    <label><span>Comarca</span><select id="filter-comarca"><option value="">Todas</option></select></label>
+                    <label><span>Situação</span><select id="filter-status"><option value="">Todas</option><option value="true">Ativas</option><option value="false">Inativas</option></select></label>
+                    <button class="secondary-button" type="submit">Filtrar</button>
+                    <button id="clear-filters" class="quiet-button" type="button">Limpar</button>
+                </form>
+                <div class="table-wrap">
+                    <table>
+                        <thead><tr><th>Unidade</th><th>Categoria</th><th>Comarca</th><th>Contato principal</th><th>Situação</th><th class="actions-heading">Ações</th></tr></thead>
+                        <tbody id="units-body"><tr><td colspan="6" class="empty-state">Carregando…</td></tr></tbody>
+                    </table>
+                </div>
+                <p id="units-count" class="table-caption"></p>
+            </section>
+
+            <section id="users-view" class="page-view" hidden>
+                <div class="section-heading">
+                    <div><h2>Usuários administrativos</h2><p>Gerencie perfis e acesso ao painel.</p></div>
+                    <button id="new-user-button" class="primary-button" type="button">＋ Novo usuário</button>
+                </div>
+                <div class="table-wrap">
+                    <table>
+                        <thead><tr><th>Nome</th><th>Usuário</th><th>Perfil</th><th>Situação</th><th class="actions-heading">Ações</th></tr></thead>
+                        <tbody id="users-body"></tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section id="audit-view" class="page-view" hidden>
+                <div class="section-heading">
+                    <div><h2>Auditoria</h2><p>Histórico de alterações administrativas.</p></div>
+                </div>
+                <div class="table-wrap">
+                    <table>
+                        <thead><tr><th>Data e hora</th><th>Responsável</th><th>Ação</th><th>Entidade</th><th>Registro</th><th>Detalhes</th></tr></thead>
+                        <tbody id="audit-body"></tbody>
+                    </table>
+                </div>
+            </section>
+
+            <footer class="system-footer">
+                <strong>ZEUS</strong>
+                <span>Sistema de consulta e gerenciamento de contatos institucionais.</span>
+                <span class="developer-credit">Developer: Maxwell Araujo</span>
+            </footer>
+        </main>
+    </div>
+
+    <dialog id="unit-dialog" class="modal">
+        <form id="unit-form">
+            <div class="modal-header">
+                <div><p class="topbar-eyebrow">CADASTRO INSTITUCIONAL</p><h2 id="unit-dialog-title">Nova unidade</h2></div>
+                <button class="icon-button close-dialog" type="button" aria-label="Fechar">×</button>
+            </div>
+            <div class="form-grid">
+                <label class="field-span"><span>Nome da unidade *</span><input id="unit-name" name="nome" maxlength="200" required></label>
+                <label><span>Categoria *</span><input id="unit-category" name="categoria" maxlength="100" required></label>
+                <label><span>Comarca</span><input id="unit-comarca" name="comarca" maxlength="120"></label>
+                <label class="field-span"><span>Descrição</span><textarea id="unit-description" name="descricao" rows="2" maxlength="4000"></textarea></label>
+                <label class="field-span"><span>Competências cadastradas</span><textarea id="unit-competencies" rows="4" maxlength="10000" placeholder="Uma competência por linha"></textarea></label>
+            </div>
+            <div class="contacts-heading"><div><h3>Contatos</h3><p>Ramais, telefones, e-mails e outros meios.</p></div><button id="add-contact-button" class="secondary-button" type="button">＋ Adicionar contato</button></div>
+            <div id="contacts-editor" class="contacts-editor"></div>
+            <p id="unit-form-message" class="form-message" role="status"></p>
+            <div class="modal-actions"><button class="quiet-button close-dialog" type="button">Cancelar</button><button id="save-unit-button" class="primary-button" type="submit">Salvar unidade</button></div>
+        </form>
+    </dialog>
+
+    <dialog id="user-dialog" class="modal small-modal">
+        <form id="user-form">
+            <div class="modal-header">
+                <div><p class="topbar-eyebrow">ACESSO AO PAINEL</p><h2 id="user-dialog-title">Novo usuário</h2></div>
+                <button class="icon-button close-dialog" type="button" aria-label="Fechar">×</button>
+            </div>
+            <label class="form-label"><span>Nome *</span><input id="user-name" maxlength="160" required></label>
+            <label class="form-label"><span>Usuário *</span><input id="user-username" minlength="3" maxlength="80" autocomplete="off" required></label>
+            <label class="form-label"><span>Perfil</span><select id="user-profile"><option value="operador">Operador</option><option value="administrador">Administrador</option></select></label>
+            <label class="form-label"><span id="user-password-label">Senha *</span><input id="user-password" type="password" minlength="12" maxlength="1024" autocomplete="new-password"></label>
+            <label class="check-label"><input id="user-active" type="checkbox" checked> Usuário ativo</label>
+            <p id="user-form-message" class="form-message" role="status"></p>
+            <div class="modal-actions"><button class="quiet-button close-dialog" type="button">Cancelar</button><button class="primary-button" type="submit">Salvar usuário</button></div>
+        </form>
+    </dialog>
+
+    <dialog id="about-dialog" class="modal small-modal">
+        <div class="about-content">
+            <div class="modal-header">
+                <div><p class="topbar-eyebrow">INFORMAÇÕES DO SISTEMA</p><h2>ZEUS</h2></div>
+                <button class="icon-button close-dialog" type="button" aria-label="Fechar">×</button>
+            </div>
+            <p>Sistema de consulta e gerenciamento de contatos institucionais.</p>
+            <p id="about-version" class="developer-credit"></p>
+            <p class="developer-credit">Developer: Maxwell Araujo</p>
+            <div class="modal-actions"><button class="quiet-button close-dialog" type="button">Fechar</button></div>
+        </div>
+    </dialog>
+
+    <script src="/static/admin/admin.js" defer></script>
+</body>
+</html>

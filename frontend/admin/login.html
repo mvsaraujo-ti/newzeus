@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="dark">
+    <title>Acesso administrativo | ZEUS</title>
+    <link rel="stylesheet" href="/static/admin/login.css">
+</head>
+<body>
+    <main class="login-shell">
+        <header class="brand">
+            <div class="brand-mark" aria-hidden="true">Z</div>
+            <div>
+                <p class="brand-name">ZEUS</p>
+                <p class="brand-context">Acesso administrativo</p>
+            </div>
+        </header>
+
+        <section class="login-panel" aria-labelledby="page-title">
+            <div id="login-view">
+                <p class="eyebrow">TJMA · AMBIENTE RESTRITO</p>
+                <h1 id="page-title">Entrar</h1>
+                <p class="intro">Use suas credenciais institucionais para continuar.</p>
+
+                <form id="login-form" autocomplete="on">
+                    <label for="usuario">Usuário</label>
+                    <input
+                        id="usuario"
+                        name="usuario"
+                        type="text"
+                        autocomplete="username"
+                        minlength="3"
+                        maxlength="80"
+                        required
+                    >
+
+                    <label for="senha">Senha</label>
+                    <input
+                        id="senha"
+                        name="senha"
+                        type="password"
+                        autocomplete="current-password"
+                        maxlength="1024"
+                        required
+                    >
+
+                    <button id="submit-button" type="submit">Entrar</button>
+                    <p id="status-message" class="status-message" role="status" aria-live="polite"></p>
+                </form>
+            </div>
+
+            <div id="authenticated-view" hidden>
+                <p class="eyebrow">SESSÃO ATIVA</p>
+                <h1 id="welcome-title">Acesso confirmado</h1>
+                <p id="user-summary" class="intro"></p>
+                <p class="pending-note">Você já possui uma sessão administrativa ativa.</p>
+                <button id="logout-button" class="secondary-button" type="button">Sair</button>
+                <p id="session-message" class="status-message" role="status" aria-live="polite"></p>
+            </div>
+        </section>
+
+        <footer class="system-footer">
+            <strong>ZEUS</strong>
+            <span>Sistema de consulta e gerenciamento de contatos institucionais.</span>
+            <span>Developer: Maxwell Araujo</span>
+        </footer>
+    </main>
+    <script src="/static/admin/login.js" defer></script>
+</body>
+</html>

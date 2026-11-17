@@ -1,0 +1,92 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ZEUS | Consulta institucional</title>
+
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+
+    <main class="app-container">
+
+        <header class="header">
+            <div class="brand">
+                <div class="brand-icon">Z</div>
+
+                <div>
+                    <h1>ZEUS</h1>
+                    <span>Consulta institucional</span>
+                </div>
+            </div>
+
+            <div class="status">
+                <span class="status-dot"></span>
+                Online
+            </div>
+        </header>
+
+        <section class="chat-container">
+
+            <div class="welcome">
+                <div class="welcome-icon">Z</div>
+
+                <h2>Olá, eu sou o Zeus.</h2>
+
+                <p>
+                    Posso ajudar a encontrar ramais e contatos cadastrados.
+                </p>
+
+                <div class="suggestions">
+                    <button onclick="enviarSugestao('Qual o ramal da 4ª Vara Cível?')">
+                        Ramal da 4ª Vara Cível
+                    </button>
+
+                    <button onclick="enviarSugestao('Qual o telefone do Fórum de São Luís?')">
+                        Telefone do Fórum
+                    </button>
+                </div>
+            </div>
+
+            <div id="messages" class="messages" aria-live="polite" aria-relevant="additions"></div>
+
+        </section>
+
+        <footer class="input-area">
+
+            <form id="chat-form">
+
+                <input
+                    type="text"
+                    id="message-input"
+                    placeholder="Pergunte sobre ramais e contatos..."
+                    autocomplete="off"
+                    required
+                >
+
+                <button type="submit" id="send-button" aria-label="Enviar mensagem">
+                    <span class="send-symbol" aria-hidden="true">↑</span>
+                    <span id="send-label">Enviar</span>
+                </button>
+
+            </form>
+
+            <p class="footer-note">
+                <strong>ZEUS</strong>
+                <span>Sistema de consulta e gerenciamento de contatos institucionais.</span>
+                <span>Developer: Maxwell Araujo</span>
+            </p>
+
+        </footer>
+
+    </main>
+
+    <script src="/static/chat.js"></script>
+
+</body>
+</html>

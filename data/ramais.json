@@ -1,0 +1,109 @@
+
+{
+  "comarca": "São Luís",
+  "estado": "MA",
+  "instituicao": "Tribunal de Justiça do Maranhão",
+  "ultima_atualizacao": "2026-11-17",
+  "unidades": [
+    {
+      "nome": "Fórum de São Luís",
+      "categoria": "Administração",
+      "ramais": ["2600"]
+    },
+    {
+      "nome": "Diretor do Fórum",
+      "categoria": "Administração",
+      "ramais": ["2595", "2596"]
+    },
+    {
+      "nome": "Administração do Fórum",
+      "categoria": "Administração",
+      "ramais": ["2598", "2599"]
+    },
+    {
+      "nome": "Depósito Público",
+      "categoria": "Administração",
+      "ramais": ["4760"]
+    },
+    {
+      "nome": "1ª Vara Cível",
+      "categoria": "Varas Cíveis",
+      "ramais": ["2549"]
+    },
+    {
+      "nome": "2ª Vara Cível",
+      "categoria": "Varas Cíveis",
+      "ramais": ["2552"]
+    },
+    {
+      "nome": "3ª Vara Cível",
+      "categoria": "Varas Cíveis",
+      "ramais": ["2553"]
+    },
+    {
+      "nome": "4ª Vara Cível",
+      "categoria": "Varas Cíveis",
+      "ramais": ["2555"]
+    },
+    {
+      "nome": "5ª Vara Cível",
+      "categoria": "Varas Cíveis",
+      "ramais": ["2557"]
+    },
+    {
+      "nome": "6ª Vara Cível",
+      "categoria": "Varas Cíveis",
+      "ramais": ["2560"]
+    },
+    {
+      "nome": "7ª Vara Cível",
+      "categoria": "Varas Cíveis",
+      "ramais": ["2563"]
+    },
+    {
+      "nome": "8ª Vara Cível",
+      "categoria": "Varas Cíveis",
+      "ramais": ["2566"]
+    },
+    {
+      "nome": "9ª Vara Cível",
+      "categoria": "Varas Cíveis",
+      "ramais": ["2569"]
+    },
+    {
+      "nome": "10ª Vara Cível",
+      "categoria": "Varas Cíveis",
+      "ramais": ["2571"]
+    },
+    {
+      "nome": "11ª Vara Cível",
+      "categoria": "Varas Cíveis",
+      "ramais": ["2572"]
+    },
+    {
+      "nome": "12ª Vara Cível",
+      "categoria": "Varas Cíveis",
+      "ramais": ["2576", "2577"]
+    },
+    {
+      "nome": "13ª Vara Cível",
+      "categoria": "Varas Cíveis",
+      "ramais": ["2578"]
+    },
+    {
+      "nome": "14ª Vara Cível",
+      "categoria": "Varas Cíveis",
+      "ramais": ["2579"]
+    },
+    {
+      "nome": "15ª Vara Cível",
+      "categoria": "Varas Cíveis",
+      "ramais": ["2582"]
+    },
+    {
+      "nome": "16ª Vara Cível",
+      "categoria": "Varas Cíveis",
+      "ramais": ["2584"]
+    }
+  ]
+}
